@@ -84,6 +84,24 @@ footer{margin-top:36px;color:#77869d;font-size:.88rem}
   </section>
 
   <section class="panel">
+    <h2>Gate 3 — two residues make a new operator</h2>
+    <p class="lead">
+      Neither branch can solve the interaction task. Averaging their operators cannot solve it.
+      Preserve both branch residues with provenance, let them interact nonlinearly, and a new useful operator appears.
+    </p>
+    <div class="eq">R_A alone → 0.500<br>R_B alone → 0.500<br>average(O_A,O_B) → 0.504<br><b>H(R_A + R_B) → 1.000</b></div>
+    <div class="row">
+      <div class="card"><div class="big pass">1.000</div><b>joint synthesis</b><p class="small">The interaction becomes available only when both stamped residues are resident.</p></div>
+      <div class="card"><div class="big fail">0.500</div><b>erase provenance</b><p class="small">Collapse branch identity before mixing and the useful interaction disappears.</p></div>
+      <div class="card"><div class="big">9.99%</div><b>outside branch span</b><p class="small">Best linear reconstruction from base + branch operators leaves a real operator residual.</p></div>
+    </div>
+    <p class="small">
+      The bilinear interaction is hand-designed. This is a possibility proof, not invention yet.
+      The new target is to discover which residue interactions produce useful held-out operators.
+    </p>
+  </section>
+
+  <section class="panel">
     <h2>The larger conjecture</h2>
     <p class="lead">
       Perhaps the useful question across transformers, resonant matter, dendritic circuits,
