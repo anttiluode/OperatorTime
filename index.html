@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operator Time</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#090b10;color:#eef3ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#202a43,#090b10 48%) fixed}
+main{width:min(1080px,94vw);margin:auto;padding:64px 0 90px}
+h1{font-size:clamp(3rem,8vw,6.5rem);letter-spacing:-.07em;line-height:.88;margin:0 0 24px}
+h2{margin:0 0 12px}.lead{max-width:860px;color:#c4cede;line-height:1.7;font-size:1.14rem}
+.panel{margin-top:28px;padding:22px;border:1px solid #2d3950;background:#10151fcc;border-radius:20px}
+.eq{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#07090d;padding:16px;border-radius:13px;overflow:auto;line-height:1.7}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.card{border:1px solid #303d55;background:#0d121a;border-radius:16px;padding:17px}
+.big{font-size:2rem;font-weight:800}.small{font-size:.9rem;line-height:1.55;color:#98a7bd}
+.pass{color:#baf4c8}.fail{color:#ffb8b8}
+.history{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0}.token{padding:10px 14px;border:1px solid #384760;border-radius:999px;background:#121927}.self{outline:2px solid #a6dfff}
+button{border:0;border-radius:999px;background:#eef6ff;color:#0b1320;padding:10px 15px;font-weight:750;cursor:pointer;margin-right:7px}
+.bars{display:grid;gap:9px;margin-top:16px}.barline{display:grid;grid-template-columns:90px 1fr 50px;gap:10px;align-items:center}.track{height:10px;background:#242d3c;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#9bdcff,#d5b6ff);transition:width .35s}
+footer{margin-top:36px;color:#77869d;font-size:.88rem}
+@media(max-width:700px){.row{grid-template-columns:1fr}.barline{grid-template-columns:70px 1fr 45px}}
+</style>
+</head>
+<body>
+<main>
+  <h1>operator<br>time.</h1>
+  <p class="lead">
+    Fixed substrate. Changing resident history. The same current input can meet a different
+    effective operator because the path into the present is still resident.
+  </p>
+
+  <section class="panel">
+    <h2>The prime</h2>
+    <div class="eq">theta(t+1) = theta(t)<br>r(t+1) = lambda r(t) + write(event)<br>O(t) = O_theta(SELF, r(t), perspective, event)<br><b>therefore O(t+1) can differ from O(t) without a weight update</b></div>
+  </section>
+
+  <section class="panel">
+    <h2>SELF stays; other objects pass through</h2>
+    <div class="history" id="history">
+      <span class="token self">SELF</span>
+      <span class="token">same current probe</span>
+    </div>
+    <button onclick="visit('mouse')">visit mouse</button>
+    <button onclick="visit('other perspective')">visit OTHER</button>
+    <button onclick="visit('text residue')">read frozen residue</button>
+    <button onclick="clearTransient()">return to SELF</button>
+    <p class="small">
+      This visual is conceptual. Visiting an object changes a simulated resident-state vector.
+      Returning removes the visible transient object but does not erase its residue.
+    </p>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Gate 1 — same present, different operator</h2>
+    <div class="row">
+      <div class="card"><div class="big pass">0.992</div><b>resident-state operator</b><p class="small">Recent transient class remains linearly accessible in the current operator response.</p></div>
+      <div class="card"><div class="big fail">0.496</div><b>fixed operator</b><p class="small">Same current probe under one fixed operator: chance.</p></div>
+      <div class="card"><div class="big fail">0.497</div><b>erase residue</b><p class="small">Erase resident history before the current probe: chance.</p></div>
+    </div>
+    <p class="small">
+      Reversing the same two-object history changes the effective operator by 0.0438 relative norm
+      and the current output by 0.2196, while parameter drift remains exactly zero.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>The larger conjecture</h2>
+    <p class="lead">
+      Perhaps the useful question across transformers, resonant matter, dendritic circuits,
+      event clocks and perspective is not “where is the weight?” but:
+      <b>what determines the operator available at this instant?</b>
+    </p>
+    <div class="eq">evolution -> development -> wiring -> learning -> resident history -> current event -> operator now</div>
+  </section>
+
+  <footer>
+    Mechanism toy and working notebook. Transformer / biological parallels are explicitly analogies unless a gate tests them.
+  </footer>
+</main>
+<script>
+let residue=[0,0,0,0,0,0];
+const names=["route","mode","phase","event","self","history"];
+function render(){
+  const bars=document.getElementById("bars");
+  bars.innerHTML=names.map((name,i)=>{
+    const v=Math.max(0,Math.min(1,Math.abs(residue[i])));
+    return '<div class="barline"><span>'+name+'</span><div class="track"><div class="fill" style="width:'+(v*100).toFixed(0)+'%"></div></div><span>'+v.toFixed(2)+'</span></div>'
+  }).join("");
+}
+function visit(name){
+  const seed=[...name].reduce((a,c)=>a+c.charCodeAt(0),0);
+  residue=residue.map((v,i)=>0.72*v+0.18+0.45*Math.abs(Math.sin(seed*(i+1))));
+  document.getElementById("history").innerHTML='<span class="token self">SELF</span><span class="token">'+name+'</span><span class="token">same current probe</span>';
+  render();
+}
+function clearTransient(){
+  residue=residue.map(v=>0.72*v);
+  document.getElementById("history").innerHTML='<span class="token self">SELF</span><span class="token">transient object gone</span><span class="token">same current probe</span>';
+  render();
+}
+render();
+</script>
+</body>
+</html>
