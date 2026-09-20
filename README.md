@@ -351,12 +351,46 @@ It does not establish that:
 
 Those remain hypotheses, analogies or future tests.
 
+
+## North star — constructive residue synthesis
+
+The new goal is stronger than remembering or routing existing material:
+
+> **Can two individually insufficient residues interact so that the combined resident state exposes a useful operator that neither branch had individually?**
+
+Write two counterfactual branches as:
+
+```
+SELF/state
+  -> branch A -> residue R_A with provenance Z_A
+  -> branch B -> residue R_B with provenance Z_B
+```
+
+Then ask whether:
+
+```
+O_mix = H(S + R_A + R_B, Z_A, Z_B)
+```
+
+contains a transformation unavailable from:
+
+```
+O_A = H(S + R_A)
+O_B = H(S + R_B)
+```
+
+and unavailable from merely averaging the two branch operators.
+
+That is the computational target behind the word **invention** in this repository: not retrieving A, not retrieving B, and not interpolating between them, but using their interaction to make a new operation accessible.
+
+The immediate Gate 3 is intentionally modest. The nonlinear interaction rule is fixed by us. Passing it would establish only that provenance-preserving residue composition can create a novel effective operator. A later gate must **discover** useful cross-residue interactions rather than receiving the interaction structure in advance.
+
 ## Next gates
 
 The next useful attacks are already visible:
 
-1. **Perspective residue** — hold current object and SELF fixed; visit another perspective; ask whether return changes the operator without moving the anchor.
-2. **Perspective residue** — extend the current SELF/OTHER idea so a temporary perspective modifies the resumed operator without moving the anchor.
+1. **Constructive residue synthesis** — combine two provenance-stamped branch residues and require a useful operator unavailable from either branch or a linear operator mixture.
+2. **Perspective residue** — hold current object and SELF fixed; visit another perspective; ask whether return changes the operator without moving the anchor.
 3. **Route divergence** — start from the same operator family, give branches different histories, then test whether their accessible operator families separate.
 4. **Oscillatory address** — replace a software route tag with locally generated phase/frequency state.
 5. **Event ownership** — combine this operator-time formulation with nested clocks from SelfAndOtherObjectsInTime.
