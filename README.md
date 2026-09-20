@@ -338,7 +338,77 @@ That is why a book can be reproducible enough to transmit structure while still 
 
 This gate still does not claim that semantic meaning has been captured. The symbols are synthetic and the external linear probe only detects whether serial order survives into the operator response.
 
-## What Gate 1 does not establish
+
+## Gate 3 — constructive residue synthesis
+
+This is the first direct test of the new north star.
+
+Two counterfactual branches leave residues in separate provenance subspaces:
+
+```
+branch A -> R_A
+branch B -> R_B
+```
+
+The task label is an XOR-like interaction:
+
+```
+label = sign_A * sign_B
+```
+
+so neither branch alone is sufficient.
+
+The fixed operator factory contains one nonlinear conjunction term:
+
+```
+synergy_gain = tanh(k * <A,R> * <B,R>)
+```
+
+When both stamped residues are resident together, this term activates an operator component absent from either branch alone.
+
+Across 64 deterministic worlds:
+
+| mechanism / diagnostic | mean |
+|---|---:|
+| **joint residue synthesis** | **1.0000** |
+| branch A only | 0.5000 |
+| branch B only | 0.5000 |
+| linear average of branch operators | 0.5039 |
+| provenance erased before mixing | 0.5000 |
+| joint operator distance outside span(base, A, B) | **0.0999** |
+| self-anchor fidelity | **1.0000** |
+| parameter drift | **0.0000** |
+
+The novelty diagnostic is important. The joint operator is not merely the arithmetic midpoint of the two branch operators. Its best reconstruction from the linear span of the base and branch-only operators still leaves about **9.99% relative residual**.
+
+So this gate establishes the narrow possibility:
+
+```
+R_A alone -> insufficient
+R_B alone -> insufficient
+average(O_A, O_B) -> insufficient
+
+R_A + R_B
+    -> nonlinear interaction
+    -> O_new
+    -> useful operation
+```
+
+Provenance matters too. The branch identity is encoded by separate physical subspaces, not passed as a symbolic string into the operator factory. Collapse both residues into one unstamped channel and performance returns to chance.
+
+### What Gate 3 does not establish
+
+This is **not yet invention**.
+
+We hand-designed the bilinear interaction that makes the two residues useful together. The gate proves that preserving two branch residues can expose a useful effective operator unavailable from either branch or a linear mixture.
+
+The stronger goal is now explicit:
+
+> **Can the system discover which residue interactions are worth composing, rather than being given the interaction rule?**
+
+That is where GAx search, active probing, WhatToLookAt and the current OperatorTime formulation can meet.
+
+## What Gates 1–3 do not establish
 
 It does not establish that:
 
@@ -389,7 +459,7 @@ The immediate Gate 3 is intentionally modest. The nonlinear interaction rule is 
 
 The next useful attacks are already visible:
 
-1. **Constructive residue synthesis** — combine two provenance-stamped branch residues and require a useful operator unavailable from either branch or a linear operator mixture.
+1. **Discovered residue synthesis** — search/select cross-residue interactions and require useful held-out operators not hand-specified in the factory.
 2. **Perspective residue** — hold current object and SELF fixed; visit another perspective; ask whether return changes the operator without moving the anchor.
 3. **Route divergence** — start from the same operator family, give branches different histories, then test whether their accessible operator families separate.
 4. **Oscillatory address** — replace a software route tag with locally generated phase/frequency state.
@@ -402,10 +472,11 @@ The next useful attacks are already visible:
 python -m pip install -r requirements.txt
 python experiment.py --assert-gate --seeds 64
 python gate2_experiment.py --assert-gate --seeds 64
+python gate3_experiment.py --assert-gate --seeds 64
 pytest -q
 ```
 
-Deterministic receipts are committed at `results/gate1.json` and `results/gate2.json`.
+Deterministic receipts are committed under `results/gate1.json` through `results/gate3.json`.
 
 ---
 
