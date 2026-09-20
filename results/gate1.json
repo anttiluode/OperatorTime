@@ -1,0 +1,31 @@
+{
+  "dynamic_accuracy": {
+    "mean": 0.992421875,
+    "std": 0.006249511699675028
+  },
+  "gate_pass": true,
+  "parameter_drift": {
+    "mean": 0.0,
+    "std": 0.0
+  },
+  "reset_accuracy": {
+    "mean": 0.4971875,
+    "std": 0.03421982018874443
+  },
+  "reversed_history_operator_distance": {
+    "mean": 0.04381722197893939,
+    "std": 0.0021605374295802244
+  },
+  "reversed_history_output_distance": {
+    "mean": 0.21959046361023887,
+    "std": 0.0034783739356765127
+  },
+  "self_anchor_fidelity": {
+    "mean": 1.0,
+    "std": 0.0
+  },
+  "static_accuracy": {
+    "mean": 0.49562500000000004,
+    "std": 0.03405533181456321
+  }
+}
