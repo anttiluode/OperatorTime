@@ -4,7 +4,7 @@ Working notebook and executable toy for a thought that became visible while look
 
 > **The important object may not be a fixed operator acting on changing data. The current state and its history may determine which operator exists *now*.**
 
-The repository slug `emaNYrotisopeR` is left untouched. Inside it, the working name is **Operator Time**.
+The repository is now named **OperatorTime**.
 
 This is not a theory of consciousness, not a claim that transformers and brains are the same machine, and not a claim that biological frequency is mysterious. The goal is narrower: write down the recurring computational motif cleanly enough that we can attack it.
 
@@ -159,9 +159,26 @@ That connects directly to **SelfAndOtherObjectsInTime**.
 
 There is a more speculative but useful lens here.
 
-A written sentence is not an operator in the strict mathematical sense. But it is a **frozen residue of a trajectory through another cognitive system**.
+A written sentence is not an operator in the strict mathematical sense. But it is a **frozen serial residue of a trajectory through another cognitive system**.
 
-When read later, it can alter the reader's resident state and therefore alter the operations available next.
+The important correction is that text is usually not consumed all at once. It arrives as a **time series**:
+
+```
+token_1 -> token_2 -> token_3 -> ... -> token_n
+```
+
+and the reader changes while reading:
+
+```
+r_(t+1) = F(r_t, token_t)
+O_(t+1) = O_theta(r_(t+1))
+```
+
+So the frozen artifact can reproducibly **induce an operator trajectory** in a reader without itself being that operator.
+
+This is very close in shape to autoregressive transformer inference: serial tokens modify the current representational/context state, which changes later routing. It is still only a structural analogy to biological reading and memory.
+
+When read later, the sequence can alter the reader's resident state and therefore alter the operations available next.
 
 So the chain can be pictured as:
 
@@ -260,6 +277,67 @@ Yet the effective operator differs.
 
 That is the smallest executable statement of **operator time**.
 
+
+## Gate 2 — frozen residue is a time series
+
+Gate 1 showed that recent path changes the operator available now.
+
+Gate 2 asks the next question directly:
+
+> If a stored artifact is replayed as a serial input, does **order** determine the later operator even when the token multiset and visible endpoint are identical?
+
+Each matched pair contains exactly the same five token vectors:
+
+```
+A -> X -> B -> Y -> C
+B -> X -> A -> Y -> C
+```
+
+Both end on the same token `C`. The only difference is the temporal position of `A` and `B`.
+
+Across 64 deterministic worlds:
+
+| mechanism / diagnostic | mean |
+|---|---:|
+| serial-reader accuracy | **1.0000** |
+| orderless bag baseline | 0.5000 |
+| shuffled-sequence baseline | 0.5013 |
+| endpoint-only baseline | 0.5000 |
+| same sequence + same reader replay distance | **0.0000** |
+| same sequence + different prior reader-state operator distance | **0.0250** |
+| parameter drift | **0.0000** |
+
+So a frozen sequence is neither adequately described by its bag of symbols nor by its final symbol.
+
+The sequence acts more like a **serialized perturbation program** for the current reader:
+
+```
+frozen sequence
+      ↓
+serial state updates
+      ↓
+operator trajectory
+      ↓
+later computation
+```
+
+But the other half matters just as much:
+
+```
+same sequence + different prior reader state
+    -> different final operator
+```
+
+So the text does **not** fully specify the operator by itself.
+
+A better statement is:
+
+> **The artifact constrains a trajectory through the reader's operator space.**
+
+That is why a book can be reproducible enough to transmit structure while still being read differently by different minds, or by the same mind at different times.
+
+This gate still does not claim that semantic meaning has been captured. The symbols are synthetic and the external linear probe only detects whether serial order survives into the operator response.
+
 ## What Gate 1 does not establish
 
 It does not establish that:
@@ -278,7 +356,7 @@ Those remain hypotheses, analogies or future tests.
 The next useful attacks are already visible:
 
 1. **Perspective residue** — hold current object and SELF fixed; visit another perspective; ask whether return changes the operator without moving the anchor.
-2. **Frozen external history** — feed a fixed stored sequence into two identical systems and test whether it reproducibly seeds a later operator trajectory.
+2. **Perspective residue** — extend the current SELF/OTHER idea so a temporary perspective modifies the resumed operator without moving the anchor.
 3. **Route divergence** — start from the same operator family, give branches different histories, then test whether their accessible operator families separate.
 4. **Oscillatory address** — replace a software route tag with locally generated phase/frequency state.
 5. **Event ownership** — combine this operator-time formulation with nested clocks from SelfAndOtherObjectsInTime.
@@ -289,10 +367,11 @@ The next useful attacks are already visible:
 ```bash
 python -m pip install -r requirements.txt
 python experiment.py --assert-gate --seeds 64
+python gate2_experiment.py --assert-gate --seeds 64
 pytest -q
 ```
 
-The deterministic receipt is committed at `results/gate1.json`.
+Deterministic receipts are committed at `results/gate1.json` and `results/gate2.json`.
 
 ---
 

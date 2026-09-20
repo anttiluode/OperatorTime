@@ -66,6 +66,24 @@ footer{margin-top:36px;color:#77869d;font-size:.88rem}
   </section>
 
   <section class="panel">
+    <h2>Gate 2 — frozen residue is serial</h2>
+    <p class="lead">
+      The same five symbols in a different order induce a different later operator.
+      Bag-of-symbols, shuffled-order, and endpoint-only attackers all fall to chance.
+    </p>
+    <div class="eq">A → X → B → Y → C<br>B → X → A → Y → C<br><b>same symbols · same endpoint · different operator trajectory</b></div>
+    <div class="row">
+      <div class="card"><div class="big pass">1.000</div><b>serial reader</b><p class="small">Order remains available in the final operator response.</p></div>
+      <div class="card"><div class="big fail">0.500</div><b>bag / endpoint</b><p class="small">Erase temporal order and the distinction disappears.</p></div>
+      <div class="card"><div class="big">0.025</div><b>reader-state effect</b><p class="small">The same frozen sequence ends in a different operator when prior resident state differs.</p></div>
+    </div>
+    <p class="small">
+      The artifact is therefore not the operator. It is a reproducible serial perturbation that constrains
+      a trajectory through a reader's operator space.
+    </p>
+  </section>
+
+  <section class="panel">
     <h2>The larger conjecture</h2>
     <p class="lead">
       Perhaps the useful question across transformers, resonant matter, dendritic circuits,
