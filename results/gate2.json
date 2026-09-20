@@ -1,0 +1,31 @@
+{
+  "bag_accuracy": {
+    "mean": 0.5,
+    "std": 0.0
+  },
+  "different_reader_state_operator_distance": {
+    "mean": 0.02499685,
+    "std": 0.00630033
+  },
+  "endpoint_accuracy": {
+    "mean": 0.5,
+    "std": 0.0
+  },
+  "gate_pass": true,
+  "parameter_drift": {
+    "mean": 0.0,
+    "std": 0.0
+  },
+  "same_reader_replay_distance": {
+    "mean": 0.0,
+    "std": 0.0
+  },
+  "serial_accuracy": {
+    "mean": 1.0,
+    "std": 0.0
+  },
+  "shuffled_accuracy": {
+    "mean": 0.50125,
+    "std": 0.02857282
+  }
+}
