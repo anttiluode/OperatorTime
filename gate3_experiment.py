@@ -74,6 +74,9 @@ def make_samples(
     np.ndarray,
     np.ndarray,
 ]:
+    if count % 4 != 0:
+        raise ValueError("count must be divisible by four")
+
     synthesis = []
     branch_a = []
     branch_b = []
@@ -81,13 +84,17 @@ def make_samples(
     provenance_erased = []
     labels = []
 
-    for _ in range(count):
-        sign_a = int(
-            rng.choice(np.array([-1, 1]))
-        )
-        sign_b = int(
-            rng.choice(np.array([-1, 1]))
-        )
+    sign_pairs = (
+        (-1, -1),
+        (-1, +1),
+        (+1, -1),
+        (+1, +1),
+    )
+
+    schedule = list(sign_pairs) * (count // 4)
+    rng.shuffle(schedule)
+
+    for sign_a, sign_b in schedule:
         label = sign_a * sign_b
 
         residue_a = world.branch_residue(
